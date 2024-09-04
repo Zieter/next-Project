@@ -43,6 +43,7 @@
 // ====================SSR=================
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface Product {
     id: string;
@@ -67,7 +68,7 @@ const ProductsPage = async () => {
         <>
             {products.map((item) => (
                 <Link key={item.id} href={`/products/${item.id}`}>
-                    <img src={item.imageUrl} width={100} alt="Product" />
+                    <Image src={item.imageUrl} width={100} height={75} alt="Product" />
                 </Link>
             ))}
         </>

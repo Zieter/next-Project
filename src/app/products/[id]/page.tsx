@@ -43,6 +43,7 @@
 
 
 // ==============SSR===============
+import Image from 'next/image';
 import React from 'react';
 
 interface ProductDetail {
@@ -90,7 +91,7 @@ export const ProductDetailPage = async ({ params }: { params: { id: string } }) 
             <p>Detail ID: {params.id}</p>
             <div>{productDetail.content || 'No content available'}</div>
             {productDetail.imageUrl ? (
-                <div><img src={productDetail.imageUrl} alt="Product Image" /></div>
+                <div><Image src={productDetail.imageUrl} alt="Product Image" width={100} height={75} /></div>
             ) : (
                 <div>No image available</div>
             )}
