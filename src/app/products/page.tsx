@@ -1,80 +1,80 @@
 // =================CSR=================
-"use client";// 要標記客戶端才可以使用
+// "use client";// 要標記客戶端才可以使用
 
-import axios from "axios";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-
-interface Product {
-    id: string;
-    imageUrl: string;
-}
-
-export default function Products() {
-    const [products, setProducts] = useState<Product[]>([]);
-
-    const getProducts = async (category='', page = 1): Promise<void> => {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-        const apiPath = process.env.NEXT_PUBLIC_API_PATH;
-        let productRes;
-        if (category === 'ALL') {
-            productRes = await axios.get(`${baseUrl}v2/api/${apiPath}/products?page=${page}`);
-        } else {
-            productRes = await axios.get(`${baseUrl}v2/api/${apiPath}/products?category=${category}&page=${page}`);
-        }
-        setProducts(productRes.data.products);
-    }
-    useEffect(()=> {
-        getProducts()
-    }, [])
-    return (<>
-        {products.map(item => {
-            return (
-                <Link key={item.id} href={`/products/${item.id}`}>
-                    <img src={item.imageUrl} width={100} />
-                </Link>
-            )
-        })}
-    </>
-    )
-}
-
-
-// ====================SSR=================
-// import React from 'react';
-// import Link from 'next/link';
+// import axios from "axios";
+// import Link from "next/link";
+// import { useEffect, useState } from "react";
 
 // interface Product {
 //     id: string;
 //     imageUrl: string;
 // }
 
-// async function fetchProducts(): Promise<Product[]> {
-//     const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-//     const apiPath = process.env.NEXT_PUBLIC_API_PATH;
-//     const res = await fetch(`${baseUrl}v2/api/${apiPath}/products?page=1`);
-//     if (!res.ok) {
-//         throw new Error('Failed to fetch products');
+// export default function Products() {
+//     const [products, setProducts] = useState<Product[]>([]);
+
+//     const getProducts = async (category='', page = 1): Promise<void> => {
+//         const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+//         const apiPath = process.env.NEXT_PUBLIC_API_PATH;
+//         let productRes;
+//         if (category === 'ALL') {
+//             productRes = await axios.get(`${baseUrl}v2/api/${apiPath}/products?page=${page}`);
+//         } else {
+//             productRes = await axios.get(`${baseUrl}v2/api/${apiPath}/products?category=${category}&page=${page}`);
+//         }
+//         setProducts(productRes.data.products);
 //     }
-//     const data = await res.json();
-//     return data.products;
+//     useEffect(()=> {
+//         getProducts()
+//     }, [])
+//     return (<>
+//         {products.map(item => {
+//             return (
+//                 <Link key={item.id} href={`/products/${item.id}`}>
+//                     <img src={item.imageUrl} width={100} />
+//                 </Link>
+//             )
+//         })}
+//     </>
+//     )
 // }
 
-// const ProductsPage = async () => {
-//     const products = await fetchProducts();
 
-//     return (
-//         <>
-//             {products.map((item) => (
-//                 <Link key={item.id} href={`/products/${item.id}`}>
-//                     <img src={item.imageUrl} width={100} alt="Product" />
-//                 </Link>
-//             ))}
-//         </>
-//     );
-// };
+// ====================SSR=================
+import React from 'react';
+import Link from 'next/link';
 
-// export default ProductsPage;
+interface Product {
+    id: string;
+    imageUrl: string;
+}
+
+async function fetchProducts(): Promise<Product[]> {
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+    const apiPath = process.env.NEXT_PUBLIC_API_PATH;
+    const res = await fetch(`${baseUrl}v2/api/${apiPath}/products?page=1`);
+    if (!res.ok) {
+        throw new Error('Failed to fetch products');
+    }
+    const data = await res.json();
+    return data.products;
+}
+
+const ProductsPage = async () => {
+    const products = await fetchProducts();
+
+    return (
+        <>
+            {products.map((item) => (
+                <Link key={item.id} href={`/products/${item.id}`}>
+                    <img src={item.imageUrl} width={100} alt="Product" />
+                </Link>
+            ))}
+        </>
+    );
+};
+
+export default ProductsPage;
 
 
 
