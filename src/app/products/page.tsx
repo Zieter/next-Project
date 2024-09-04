@@ -68,7 +68,7 @@ const ProductsPage = async () => {
         <>
             {products.map((item) => (
                 <Link key={item.id} href={`/products/${item.id}`}>
-                    <Image src={item.imageUrl} width={100} height={75} alt="Product" />
+                    <Image src={item.imageUrl} width={100} height={75} alt="Product" /> {/*Next推薦改用Image來取代img，並給予"寬高" */}
                 </Link>
             ))}
         </>

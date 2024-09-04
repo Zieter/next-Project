@@ -1,3 +1,4 @@
+import React from 'react';// jest要求引入
 import Link from "next/link";
 
 export default function Home() {
