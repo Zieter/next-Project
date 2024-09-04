@@ -1,0 +1,8 @@
+1. 每層資料夾的page.tsx為預設，不可更改檔名
+2.  page.tsx檔案內的組件名稱就沒差(開頭可大可小寫)
+
+架構為: 
+1.app底下的page.tsx為預設頁面(可以引入不同頁面當預設)
+2.app底下的資料夾相等於/
+3.http://localhost:3000/about 等於 app/about/page.tsx
+
